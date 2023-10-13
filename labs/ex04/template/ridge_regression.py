@@ -26,5 +26,14 @@ def ridge_regression(y, tx, lambda_):
     # ***************************************************
     # COPY YOUR CODE FROM EX03 HERE
     # ridge regression: TODO
+    tx_transpose = np.transpose(tx)
+    lambda_ = 2 * len(y) * lambda_
+    left = tx_transpose@tx + np.eye(tx.shape[1]) * lambda_
+    right = tx_transpose@y
+
+    """"# Version WITHOUT inversion
+    return np.linalg.lstsq(left, right, rcond=None)[0]"""
+
+    # Version WITH inversion
+    return np.linalg.inv(left) @ right
     # ***************************************************
-    raise NotImplementedError
